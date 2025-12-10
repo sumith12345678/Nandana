@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>NANDANA C | Tax Consultant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    />
+
+    <!-- Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    />
+
+    <style>
+        :root {
+            --primary: #8f6bff;
+            --secondary: #ff6bc1;
+            --bg: #050816;
+            --card: rgba(15, 23, 42, 0.9);
+            --border-glow: rgba(143, 107, 255, 0.6);
+        }
+
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+                "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #1f2937 0, #020617 40%, #000 100%);
+            color: #e5e7eb;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(
+                90deg,
+                rgba(15, 23, 42, 0.95),
+                rgba(15, 23, 42, 0.9),
+                rgba(30, 64, 175, 0.6)
+            );
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            letter-spacing: 0.08em;
+        }
+
+        .nav-link {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .nav-link.active {
+            color: var(--secondary) !important;
+        }
+
+        /* Hero */
+        .hero-section {
+            padding-top: 7rem;
+            padding-bottom: 4rem;
+        }
+
+        .glass-card {
+            position: relative;
+            border-radius: 1.75rem;
+            background: radial-gradient(circle at top left, #1f2937, #020617);
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            box-shadow:
+                0 0 0 1px rgba(15, 23, 42, 0.9),
+                0 25px 60px rgba(15, 23, 42, 0.95),
+                0 0 40px rgba(139, 92, 246, 0.35);
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background:
+                radial-gradient(circle at 0 0, rgba(139, 92, 246, 0.3), transparent 55%),
+                radial-gradient(circle at 100% 0, rgba(236, 72, 153, 0.25), transparent 55%);
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        .glass-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .tag-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #e5e7eb;
+            background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.6));
+        }
+
+        .hero-name {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        .hero-role {
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-role-highlight {
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(120deg, #f97316, #e11d48, #22d3ee);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: hueShift 6s linear infinite;
+        }
+
+        @keyframes hueShift {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        .hero-badge-row span {
+            font-size: 0.82rem;
+            opacity: 0.85;
+        }
+
+        .hero-contact a {
+            text-decoration: none;
+            color: #e5e7eb;
+            font-size: 0.9rem;
+        }
+
+        .hero-contact a:hover {
+            color: var(--secondary);
+        }
+
+        /* Avatar */
+        .profile-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-glow {
+            position: absolute;
+            inset: -18%;
+            background: conic-gradient(
+                from 180deg,
+                rgba(129, 140, 248, 0.1),
+                rgba(244, 114, 182, 0.7),
+                rgba(34, 211, 238, 0.7),
+                rgba(129, 140, 248, 0.1)
+            );
+            border-radius: 50%;
+            filter: blur(18px);
+            opacity: 0.9;
+            animation: rotateGlow 16s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .profile-img {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(148, 163, 184, 0.7);
+            box-shadow:
+                0 20px 40px rgba(15, 23, 42, 0.9),
+                0 0 40px rgba(96, 165, 250, 0.45);
+            z-index: 1;
+            animation: floatY 4.5s ease-in-out infinite;
+        }
+
+        @keyframes floatY {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .status-chip {
+            position: absolute;
+            bottom: -25px;
+            right: 4px;
+            background: linear-gradient(135deg, #22c55e, #4ade80);
+            color: #022c22;
+            padding: 0.35rem 0.8rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(21, 128, 61, 0.7);
+        }
+
+        /* Sections */
+        .section {
+            padding: 3.5rem 0;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: #9ca3af;
+            margin-bottom: 0.4rem;
+        }
+
+        .section-heading {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.8rem;
+        }
+
+        .section-accent {
+            width: 42px;
+            height: 3px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .content-card {
+            border-radius: 1.4rem;
+            background: radial-gradient(circle at top left, #020617, #020617);
+            border: 1px solid rgba(55, 65, 81, 0.9);
+            box-shadow:
+                0 24px 50px rgba(15, 23, 42, 0.95),
+                0 0 30px rgba(59, 130, 246, 0.3);
+            padding: 1.8rem 1.7rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.12), transparent 55%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .content-card:hover::before {
+            opacity: 1;
+        }
+
+        .content-card h5 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-weight: 600;
+            color: #c4b5fd;
+            margin-bottom: 1rem;
+        }
+
+        .content-card p,
+        .content-card li {
+            font-size: 0.92rem;
+            color: #e5e7eb;
+        }
+
+        .content-card ul {
+            padding-left: 1.1rem;
+            margin-bottom: 0;
+        }
+
+        .pill {
+            display: inline-flex;
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            font-size: 0.78rem;
+        }
+
+        .pill i {
+            font-size: 0.75rem;
+        }
+
+        .stack-pill {
+            border-radius: 999px;
+            padding: 0.45rem 0.9rem;
+            font-size: 0.8rem;
+        }
+
+        /* Reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px) scale(0.98);
+            transition:
+                opacity 0.7s ease,
+                transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .delay-1 {
+            transition-delay: 0.05s;
+        }
+        .delay-2 {
+            transition-delay: 0.12s;
+        }
+        .delay-3 {
+            transition-delay: 0.2s;
+        }
+
+        /* Footer contact strip */
+        .contact-strip {
+            border-top: 1px solid rgba(55, 65, 81, 0.9);
+            padding: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .contact-strip a {
+            color: #e5e7eb;
+            text-decoration: none;
+        }
+
+        .contact-strip a:hover {
+            color: var(--secondary);
+        }
+
+        @media (max-width: 991.98px) {
+            .hero-section {
+                padding-top: 6.3rem;
+            }
+
+            .profile-img {
+                width: 190px;
+                height: 190px;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .hero-section {
+                padding-top: 6rem;
+            }
+            .content-card {
+                padding: 1.4rem 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="80">
+    <!-- Navbar -->
+    <nav id="mainNav" class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-lg">
+            <a class="navbar-brand" href="#top">
+                NANDANA&nbsp;C
+            </a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent"
+                aria-controls="navbarContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+                <ul class="navbar-nav small text-uppercase">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#summary-section">Summary</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#experience-section">Experience</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#education-section">Education</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#competencies-section">Core Competencies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#languages-section">Languages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact-section">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <main id="top" class="hero-section">
+        <div class="container-lg">
+            <div class="glass-card p-3 p-md-4">
+                <div class="glass-inner">
+                    <div class="row align-items-center g-4 g-lg-5">
+                        <div class="col-lg-7">
+                            <div class="tag-pill mb-3 reveal visible">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>Calicut · UAE Tax Experience</span>
+                            </div>
+
+                            <div class="hero-role text-muted reveal delay-1">
+                                <span class="hero-role-highlight">TAX CONSULTANT</span>
+                            </div>
+                            <h1 class="hero-name mb-2 reveal delay-1">
+                                NANDANA&nbsp;C
+                            </h1>
+
+                            <div class="hero-badge-row mb-4 d-flex flex-wrap gap-2 reveal delay-2">
+                                <span>
+                                    <i class="fa-solid fa-envelope me-2"></i>
+                                    nandana773636@gmail.com
+                                </span>
+                                <span>
+                                    <i class="fa-solid fa-phone me-2"></i>
+                                    +91&nbsp;7736363349
+                                </span>
+                            </div>
+
+                            <div class="hero-contact mb-3 reveal delay-2">
+                                <a
+                                    href="mailto:nandana773636@gmail.com"
+                                    class="me-3 d-inline-flex align-items-center"
+                                >
+                                    <i class="fa-regular fa-paper-plane me-2"></i>
+                                    Email
+                                </a>
+                                <a
+                                    href="tel:+917736363349"
+                                    class="me-3 d-inline-flex align-items-center"
+                                >
+                                    <i class="fa-solid fa-phone-flip me-2"></i>
+                                    Call
+                                </a>
+                                <a
+                                    href="http://www.linkedin.com/in/nandana-c-pradeep"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="d-inline-flex align-items-center"
+                                >
+                                    <i class="fa-brands fa-linkedin me-2"></i>
+                                    linkedin.com/in/nandana-c-pradeep
+                                </a>
+                            </div>
+
+                            <div class="mt-4 reveal delay-3">
+                                <div class="pill mb-2">
+                                    <i class="fa-solid fa-briefcase me-2"></i>
+                                    UAE Tax Consultant with 2 Year of Experience
+                                </div>
+                                <p class="mt-3 mb-0">
+                                    Detail-oriented and highly organized tax consultant with one
+                                    year of experience in the UAE tax sector. Proficient in
+                                    corporate tax registration, tax grouping, deregistration, and
+                                    compliance with Federal Tax Authority (FTA) regulations. Adept
+                                    at preparing professional documentation, handling client
+                                    inquiries, and troubleshooting regulatory submissions. Skilled
+                                    in managing tax-related administrative processes, ensuring
+                                    accuracy, and maintaining up-to-date compliance standards.
+                                    Strong analytical abilities and expertise in UAE tax
+                                    frameworks, committed to delivering precise and efficient
+                                    solutions for businesses.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5 text-center">
+                            <div class="profile-wrapper mt-2 mt-lg-0 reveal delay-2">
+                                <div class="profile-glow"></div>
+                                <img
+                                    src="images/nan.jpg"
+                                    alt="Profile photo of NANDANA C"
+                                    class="profile-img"
+                                />
+                                <div class="status-chip">
+                                    <i class="fa-solid fa-circle me-1" style="font-size: 0.6rem" style="margin-top: 40px;"></i>
+                                    Available · Tax Consultant
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUMMARY SECTION -->
+        <section id="summary-section" class="section">
+            <div class="container-lg">
+                <div class="row align-items-start g-4">
+                    <div class="col-lg-4">
+                        <div class="section-title">SUMMERY</div>
+                        <div class="section-heading">Professional Overview</div>
+                        <div class="section-accent"></div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="content-card reveal delay-1">
+                            <h5>SUMMERY</h5>
+                            <p class="mb-0">
+                                UAE Tax Consultant with 2 Year of Experience Detail-oriented and
+                                highly organized tax consultant with one year of experience in the
+                                UAE tax sector. Proficient in corporate tax registration, tax
+                                grouping, deregistration, and compliance with Federal Tax Authority
+                                (FTA) regulations. Adept at preparing professional documentation,
+                                handling client inquiries, and troubleshooting regulatory
+                                submissions. Skilled in managing tax-related administrative
+                                processes, ensuring accuracy, and maintaining up-to-date compliance
+                                standards. Strong analytical abilities and expertise in UAE tax
+                                frameworks, committed to delivering precise and efficient solutions
+                                for businesses.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section id="experience-section" class="section">
+            <div class="container-lg">
+                <div class="row align-items-start g-4">
+                    <div class="col-lg-4">
+                        <div class="section-title">Professional Experience</div>
+                        <div class="section-heading">Roles & Responsibilities</div>
+                        <div class="section-accent"></div>
+                    </div>
+                    <div class="col-lg-8">
+                        <!-- Tax Consultant -->
+                        <div class="content-card mb-3 reveal delay-1">
+                            <h5>Tax Consultant · ICB Tax Consultancy, UAE</h5>
+                            <ul>
+                                <li>
+                                    Handled Corporate Tax (CT), VAT, AML, and Customs registrations
+                                    for a wide range of clients across different sectors in
+                                    compliance with UAE regulations.
+                                </li>
+                                <li>
+                                    Managed VAT filing, CT filing, and AML reporting, ensuring
+                                    accurate submissions and timely compliance with all statutory
+                                    requirements.
+                                </li>
+                                <li>
+                                    Oversaw company deregistrations and processed related
+                                    documentation efficiently while minimizing risk and ensuring
+                                    regulatory clarity.
+                                </li>
+                                <li>
+                                    Proactively managed penalties and client complaints, providing
+                                    expert-level reconsideration support and resolving issues
+                                    through strategic communication with relevant authorities.
+                                </li>
+                                <li>
+                                    Facilitated customs registration for smooth trade operations,
+                                    ensuring compliance with UAE trade regulations.
+                                </li>
+                                <li>
+                                    Maintained regular follow-ups with clients to ensure timely
+                                    submissions, documentation, and resolution of pending tasks.
+                                </li>
+                                <li>
+                                    Monitored and ensured adherence to regulatory deadlines through
+                                    a structured calendar system and internal reminders.
+                                </li>
+                                <li>
+                                    Stayed up to date with daily tax regulation updates,
+                                    disseminating key changes to internal teams and clients to
+                                    ensure compliance and readiness.
+                                </li>
+                                <li>
+                                    Played a key role in client support, delivering high-quality
+                                    advisory on tax matters, filing strategies, and compliance
+                                    obligations.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Academic Intern - KPRD & Affiliates -->
+                        <div class="content-card mb-3 reveal delay-2">
+                            <h5>Academic Intern · KPRD &amp; Affiliates</h5>
+                            <ul>
+                                <li>
+                                    Compiled and reviewed financial statements for corporate and
+                                    non-corporate entities, ensuring accuracy and compliance.
+                                </li>
+                                <li>
+                                    Adhered to established accounting principles and regulatory
+                                    standards to maintain transparent financial reporting.
+                                </li>
+                                <li>
+                                    Conducted financial data analysis, reconciled accounts, and
+                                    ensured consistency in financial records.
+                                </li>
+                                <li>
+                                    Provided accurate financial insights to assist businesses in
+                                    making informed strategic decisions.
+                                </li>
+                                <li>
+                                    Streamlined reporting processes to enhance efficiency and
+                                    maintain financial integrity.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- AJM & Associates -->
+                        <div class="content-card reveal delay-3">
+                            <h5>AJM &amp; Associates</h5>
+                            <ul>
+                                <li>
+                                    Managed accurate GST filings, ensuring timely submissions while
+                                    maintaining compliance with statutory regulations.
+                                </li>
+                                <li>
+                                    Conducted detailed reconciliation of GST records, minimizing
+                                    discrepancies and ensuring compliance with tax authorities.
+                                </li>
+                                <li>
+                                    Implemented efficient filing practices, improving accuracy and
+                                    streamlining financial reporting processes.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION SECTION -->
+        <section id="education-section" class="section">
+            <div class="container-lg">
+                <div class="row align-items-start g-4">
+                    <div class="col-lg-4">
+                        <div class="section-title">Education</div>
+                        <div class="section-heading">Academic Background</div>
+                        <div class="section-accent"></div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="content-card reveal delay-1">
+                            <h5>EDUCATION</h5>
+                            <p class="mb-1">
+                                Bachelor of Commerce<br />
+                                Calicut University, Kerala, India
+                            </p>
+                            <p class="mb-0">
+                                2021 – 2024
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CORE COMPETENCIES SECTION -->
+        <section id="competencies-section" class="section">
+            <div class="container-lg">
+                <div class="row align-items-start g-4">
+                    <div class="col-lg-4">
+                        <div class="section-title">Core Competencies</div>
+                        <div class="section-heading">Professional Strengths</div>
+                        <div class="section-accent"></div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="content-card reveal delay-1">
+                            <h5>CORE COMPETENCIES</h5>
+                            <div class="d-flex flex-wrap gap-2 mt-2">
+                                <span class="stack-pill border border-secondary-subtle">
+                                    Management and Organizational Skills
+                                </span>
+                                <span class="stack-pill border border-secondary-subtle">
+                                    Negotiation and Problem-Solving
+                                </span>
+                                <span class="stack-pill border border-secondary-subtle">
+                                    Adaptability to Dynamic Environments
+                                </span>
+                                <span class="stack-pill border border-secondary-subtle">
+                                    Leadership and Team Collaboration
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LANGUAGES SECTION -->
+        <section id="languages-section" class="section pb-2">
+            <div class="container-lg">
+                <div class="row align-items-start g-4">
+                    <div class="col-lg-4">
+                        <div class="section-title">Languages</div>
+                        <div class="section-heading">Communication</div>
+                        <div class="section-accent"></div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="content-card reveal delay-1">
+                            <h5>LANGUAGES</h5>
+                            <ul class="mt-2 mb-0">
+                                <li>English (Fluent)</li>
+                                <li>Malayalam (Native Proficiency</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+            <section id="competencies-section" class="section">
+            <div class="container-lg">
+                <div class="row align-items-start g-4">
+                    <div class="col-lg-4">
+                        <div class="section-title">Proffessional Experience</div>
+                        <div class="section-heading">Professional Skills</div>
+                        <div class="section-accent"></div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="content-card reveal delay-1"> 
+                            <h5>PROFESSIONAL CORE SKILLS</h5>
+                            <div class="d-flex flex-wrap gap-2 mt-2">
+                                <span class="stack-pill border border-secondary-subtle">
+                                    Corporate Tax Registration
+                                </span>
+                                <span class="stack-pill border border-secondary-subtle">
+                                    Vat Registraion
+                                </span>
+                                <span class="stack-pill border border-secondary-subtle">
+                                    AML Registraion
+                                </span>
+                                <span class="stack-pill border border-secondary-subtle">
+                                    Custom Registraion
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+    </main>
+
+
+
+
+
+    <!-- CONTACT FOOTER STRIP -->
+    <footer id="contact-section" class="contact-strip mt-3">
+        <div class="container-lg">
+            <div class="row gy-2 align-items-center">
+                <div class="col-md-4">
+                    <strong>Contact</strong>
+                </div>
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row gap-2 justify-content-md-end">
+                        <a href="mailto:nandana773636@gmail.com">
+                            <i class="fa-solid fa-envelope me-1"></i>
+                            nandana773636@gmail.com
+                        </a>
+                        <a href="tel:+917736363349">
+                            <i class="fa-solid fa-phone me-1"></i>
+                            +91 7736363349
+                        </a>
+                        <a
+                            href="http://www.linkedin.com/in/nandana-c-pradeep"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <i class="fa-brands fa-linkedin me-1"></i>
+                            linkedin.com/in/nandana-c-pradeep
+                        </a>
+                        <span>
+                            <i class="fa-solid fa-location-dot me-1"></i>
+                            Calicut
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Simple Reveal & Navbar Active Script -->
+    <script>
+        // Reveal on scroll
+        const revealItems = document.querySelectorAll(".reveal");
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            },
+            { threshold: 0.18 }
+        );
+        revealItems.forEach((el) => observer.observe(el));
+
+        // Navbar active link sync with scrollspy
+        const navLinks = document.querySelectorAll("#mainNav .nav-link");
+        navLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+                navLinks.forEach((l) => l.classList.remove("active"));
+                link.classList.add("active");
+            });
+        });
+    </script>
+</body>
+</html>
